@@ -15,16 +15,16 @@ namespace back_end_application
         
         // Connection string for your IoT Hub
         // az iot hub show-connection-string --hub-name {your iot hub name} --policy-name service
-        private readonly static string s_connectionString = "{Your service connection string here}";
+        private readonly static string s_connectionString = "HostName=BharathIV8FirstIOTHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=viQ50/aiP8Ph8ygC5v3rgVb4O43rvhQ4rlcJ0M+7j+I=";
 
         // Invoke the direct method on the device, passing the payload
         private static async Task InvokeMethod()
         {
             var methodInvocation = new CloudToDeviceMethod("SetTelemetryInterval") { ResponseTimeout = TimeSpan.FromSeconds(30) };
             methodInvocation.SetPayloadJson("10");
-
+            
             // Invoke the direct method asynchronously and get the response from the simulated device.
-            var response = await s_serviceClient.InvokeDeviceMethodAsync("MyDotnetDevice", methodInvocation);
+            var response = await s_serviceClient.InvokeDeviceMethodAsync("MyDevice", methodInvocation);
 
             Console.WriteLine("Response status: {0}, payload:", response.Status);
             Console.WriteLine(response.GetPayloadAsJson());
